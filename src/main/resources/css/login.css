@@ -1,0 +1,188 @@
+.root {
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
+    -fx-font-smoothing-type: gray;
+}
+
+.login-root {
+    -fx-background-color: #f7f3ed;
+}
+
+.brand-panel {
+    -fx-background-color: #332219;
+}
+
+.brand-mark {
+    -fx-background-color: #c8955c;
+    -fx-background-radius: 14px;
+}
+
+.brand-mark-text {
+    -fx-text-fill: #fffaf3;
+    -fx-font-size: 25px;
+    -fx-font-weight: 800;
+}
+
+.brand-name {
+    -fx-text-fill: #fffaf3;
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+}
+
+.brand-product,
+.eyebrow {
+    -fx-text-fill: #c8955c;
+    -fx-font-size: 10px;
+    -fx-font-weight: 700;
+}
+
+.coffee-art {
+    -fx-background-color: rgba(255, 250, 243, 0.035);
+    -fx-background-radius: 28px;
+    -fx-border-color: rgba(255, 250, 243, 0.08);
+    -fx-border-radius: 28px;
+}
+
+.coffee-art-halo {
+    -fx-fill: rgba(200, 149, 92, 0.11);
+    -fx-stroke: rgba(200, 149, 92, 0.28);
+    -fx-stroke-width: 1.5px;
+}
+
+.coffee-cup {
+    -fx-fill: transparent;
+    -fx-stroke: #d7aa76;
+    -fx-stroke-width: 5px;
+    -fx-stroke-line-cap: round;
+}
+
+.steam-line {
+    -fx-stroke: rgba(255, 250, 243, 0.65);
+    -fx-stroke-width: 3px;
+    -fx-stroke-line-cap: round;
+}
+
+.brand-headline {
+    -fx-text-fill: #fffaf3;
+    -fx-font-size: 30px;
+    -fx-font-weight: 700;
+}
+
+.brand-tagline {
+    -fx-text-fill: #cfc1b6;
+    -fx-font-size: 14px;
+    -fx-line-spacing: 4px;
+}
+
+.form-panel {
+    -fx-background-color: #f7f3ed;
+}
+
+.login-card {
+    -fx-background-color: #fffdf9;
+    -fx-background-radius: 22px;
+    -fx-border-color: #e7ded3;
+    -fx-border-radius: 22px;
+    -fx-effect: dropshadow(gaussian, rgba(55, 38, 26, 0.12), 32, 0.16, 0, 10);
+    -fx-padding: 42px 46px;
+}
+
+.welcome-title {
+    -fx-text-fill: #2e211a;
+    -fx-font-size: 32px;
+    -fx-font-weight: 750;
+}
+
+.welcome-copy {
+    -fx-text-fill: #74685f;
+    -fx-font-size: 14px;
+}
+
+.field-label {
+    -fx-text-fill: #3b2c23;
+    -fx-font-size: 13px;
+    -fx-font-weight: 650;
+}
+
+.login-field {
+    -fx-background-color: #fbf8f4;
+    -fx-background-radius: 10px;
+    -fx-border-color: #d8cec3;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #9b9188;
+    -fx-text-fill: #2e211a;
+    -fx-padding: 12px 14px;
+}
+
+.login-field:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #a96f3e;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(169, 111, 62, 0.16), 10, 0.08, 0, 0);
+    -fx-padding: 11px 13px;
+}
+
+.show-password {
+    -fx-text-fill: #675b52;
+    -fx-font-size: 12px;
+}
+
+.show-password .box {
+    -fx-background-color: #fffdf9;
+    -fx-background-radius: 4px;
+    -fx-border-color: #b9aa9c;
+    -fx-border-radius: 4px;
+}
+
+.show-password:selected .mark {
+    -fx-background-color: #fffdf9;
+}
+
+.show-password:selected .box {
+    -fx-background-color: #9b6236;
+    -fx-border-color: #9b6236;
+}
+
+.status-message {
+    -fx-text-fill: #477052;
+    -fx-font-size: 12px;
+    -fx-line-spacing: 2px;
+}
+
+.status-message:error {
+    -fx-text-fill: #a23f37;
+}
+
+.sign-in-button {
+    -fx-background-color: #7c4b2d;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-padding: 13px 22px;
+    -fx-text-fill: #fffdf9;
+}
+
+.sign-in-button:hover {
+    -fx-background-color: #683d24;
+}
+
+.sign-in-button:focused {
+    -fx-border-color: #d3a36f;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+}
+
+.sign-in-button:disabled {
+    -fx-opacity: 0.62;
+}
+
+.progress-indicator {
+    -fx-progress-color: #9b6236;
+}
+
+.security-note {
+    -fx-text-fill: #8a7e74;
+    -fx-font-size: 11px;
+}

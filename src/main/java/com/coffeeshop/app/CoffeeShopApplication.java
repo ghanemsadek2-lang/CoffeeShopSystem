@@ -1,5 +1,6 @@
 package com.coffeeshop.app;
 
+import com.coffeeshop.controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,11 +18,12 @@ import java.util.Objects;
 public final class CoffeeShopApplication extends Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoffeeShopApplication.class);
-    private static final String MAIN_VIEW = "/fxml/main-view.fxml";
-    private static final String STYLESHEET = "/css/application.css";
+    private static final String LOGIN_VIEW = "/fxml/login-view.fxml";
+    private static final String LOGIN_STYLESHEET = "/css/login.css";
 
     private ApplicationContext applicationContext;
     private StartupException startupFailure;
+    private LoginController loginController;
 
     @Override
     public void init() {
@@ -42,31 +44,50 @@ public final class CoffeeShopApplication extends Application {
         }
 
         URL viewUrl = Objects.requireNonNull(
-                CoffeeShopApplication.class.getResource(MAIN_VIEW),
-                "Missing required FXML resource: " + MAIN_VIEW
+                CoffeeShopApplication.class.getResource(LOGIN_VIEW),
+                "Missing required FXML resource: " + LOGIN_VIEW
         );
         URL stylesheetUrl = Objects.requireNonNull(
-                CoffeeShopApplication.class.getResource(STYLESHEET),
-                "Missing required stylesheet resource: " + STYLESHEET
+                CoffeeShopApplication.class.getResource(LOGIN_STYLESHEET),
+                "Missing required stylesheet resource: " + LOGIN_STYLESHEET
         );
 
-        Parent root = FXMLLoader.load(viewUrl);
-        Scene scene = new Scene(root, 960, 600);
+        FXMLLoader loader = new FXMLLoader(viewUrl);
+        loader.setControllerFactory(type -> createController(type));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 1120, 700);
         scene.getStylesheets().add(stylesheetUrl.toExternalForm());
 
-        primaryStage.setTitle("Coffee Shop Management System");
-        primaryStage.setMinWidth(720);
-        primaryStage.setMinHeight(480);
+        primaryStage.setTitle("Coffee Shop Management System — Sign In");
+        primaryStage.setMinWidth(900);
+        primaryStage.setMinHeight(600);
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
 
     @Override
     public void stop() {
+        if (loginController != null) {
+            loginController.close();
+            loginController = null;
+        }
         if (applicationContext != null) {
             applicationContext.close();
             applicationContext = null;
         }
+    }
+
+    private Object createController(Class<?> type) {
+        if (type == LoginController.class) {
+            loginController = new LoginController(
+                    applicationContext.authenticationService(),
+                    applicationContext.session()
+            );
+            return loginController;
+        }
+        throw new IllegalArgumentException("Unsupported FXML controller: " + type.getName());
     }
 
     private static void showStartupFailure(StartupException failure) {
