@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           styleClass="app-root">
+    <VBox alignment="CENTER" maxWidth="560.0" spacing="12.0" styleClass="placeholder-card">
+        <padding>
+            <Insets bottom="40.0" left="48.0" right="48.0" top="40.0" />
+        </padding>
+        <Label styleClass="placeholder-title" text="Coffee Shop Management System" />
+        <Label styleClass="placeholder-subtitle"
+               text="Application foundation initialized successfully."
+               wrapText="true" />
+    </VBox>
+</StackPane>

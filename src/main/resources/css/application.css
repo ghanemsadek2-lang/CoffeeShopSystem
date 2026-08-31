@@ -1,0 +1,29 @@
+.root {
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
+    -fx-font-smoothing-type: gray;
+}
+
+.app-root {
+    -fx-background-color: #f4f1ec;
+    -fx-padding: 32px;
+}
+
+.placeholder-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 14px;
+    -fx-border-color: #e3ddd5;
+    -fx-border-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(55, 42, 30, 0.10), 24, 0.15, 0, 8);
+}
+
+.placeholder-title {
+    -fx-text-fill: #2f241c;
+    -fx-font-size: 26px;
+    -fx-font-weight: 700;
+}
+
+.placeholder-subtitle {
+    -fx-text-fill: #71665d;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+}

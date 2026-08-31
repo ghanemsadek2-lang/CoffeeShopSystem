@@ -1,0 +1,31 @@
+# Maven
+target/
+.maven-repository/
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Operating systems
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Runtime files
+*.log
+logs/
+
+# Local configuration and secrets
+application.properties
+*.local.properties
+.env
+.env.*
+!.env.example
+
+# Java crash and diagnostic files
+hs_err_pid*
+replay_pid*
