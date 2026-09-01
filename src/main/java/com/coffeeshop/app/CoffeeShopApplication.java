@@ -9,16 +9,19 @@ import com.coffeeshop.controller.OrdersController;
 import com.coffeeshop.controller.TablesController;
 import com.coffeeshop.controller.MenuManagementController;
 import com.coffeeshop.controller.InventoryManagementController;
+import com.coffeeshop.controller.RegisterManagementController;
 import com.coffeeshop.model.NavigationItem;
 import com.coffeeshop.security.NavigationPolicy;
 import com.coffeeshop.repository.JdbcPosRepository;
 import com.coffeeshop.repository.JdbcOrderManagementRepository;
 import com.coffeeshop.repository.JdbcMenuManagementRepository;
 import com.coffeeshop.repository.JdbcInventoryRepository;
+import com.coffeeshop.repository.JdbcRegisterRepository;
 import com.coffeeshop.service.PosService;
 import com.coffeeshop.service.OrderManagementService;
 import com.coffeeshop.service.MenuManagementService;
 import com.coffeeshop.service.InventoryService;
+import com.coffeeshop.service.RegisterService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -169,7 +172,9 @@ public final class CoffeeShopApplication extends Application {
                 : item == NavigationItem.ORDERS ? "/fxml/orders-view.fxml"
                 : item == NavigationItem.TABLES ? "/fxml/tables-view.fxml"
                 : item == NavigationItem.PRODUCTS ? "/fxml/menu-management-view.fxml"
-                : item == NavigationItem.INVENTORY ? "/fxml/inventory-management-view.fxml" : "/fxml/module-placeholder.fxml";
+                : item == NavigationItem.INVENTORY ? "/fxml/inventory-management-view.fxml"
+                : item == NavigationItem.REGISTERS ? "/fxml/register-management-view.fxml"
+                : "/fxml/module-placeholder.fxml";
         FXMLLoader loader = new FXMLLoader(resource(fxml));
         loader.setControllerFactory(type -> {
             if (type == DashboardController.class) {
@@ -189,6 +194,10 @@ public final class CoffeeShopApplication extends Application {
             if (type == InventoryManagementController.class) {
                 return new InventoryManagementController(new InventoryService(
                         new JdbcInventoryRepository(applicationContext.dataSource())),applicationContext.session());
+            }
+            if (type == RegisterManagementController.class) {
+                return new RegisterManagementController(new RegisterService(
+                        new JdbcRegisterRepository(applicationContext.dataSource())), applicationContext.session());
             }
             OrderManagementService orderService = new OrderManagementService(
                     new JdbcOrderManagementRepository(applicationContext.dataSource()));

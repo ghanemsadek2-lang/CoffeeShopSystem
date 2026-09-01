@@ -8,6 +8,7 @@ public enum NavigationItem {
     TABLES("Tables"),
     PRODUCTS("Products / Menu"),
     INVENTORY("Inventory"),
+    REGISTERS("Register / Shifts"),
     CUSTOMERS("Customers"),
     EMPLOYEES("Employees / Users"),
     PURCHASING("Suppliers / Purchases"),

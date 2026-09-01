@@ -16,7 +16,8 @@ class NavigationPolicyTest {
 
     @Test void cashierReceivesOperationalDestinationsOnly() {
         var allowed = policy.allowedItems(user("CASHIER"));
-        assertTrue(allowed.containsAll(Set.of(NavigationItem.POS, NavigationItem.ORDERS, NavigationItem.TABLES)));
+        assertTrue(allowed.containsAll(Set.of(NavigationItem.POS, NavigationItem.ORDERS,
+                NavigationItem.TABLES, NavigationItem.REGISTERS)));
         assertFalse(allowed.contains(NavigationItem.SETTINGS));
         assertFalse(allowed.contains(NavigationItem.EMPLOYEES));
     }
