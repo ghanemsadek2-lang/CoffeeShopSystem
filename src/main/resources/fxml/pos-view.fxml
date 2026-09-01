@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coffeeshop.controller.PosController" minWidth="0" minHeight="0" styleClass="module-root">
+ <top><FlowPane alignment="CENTER_LEFT" hgap="10" vgap="8"><ComboBox fx:id="categoryBox" minWidth="150" prefWidth="190" promptText="All categories"/><TextField fx:id="searchField" minWidth="180" prefWidth="320" promptText="Search products"/><Button onAction="#refresh" text="Refresh"/><padding><Insets bottom="10" left="14" right="14" top="12"/></padding></FlowPane></top>
+ <center><SplitPane dividerPositions="0.62" minWidth="0" minHeight="0">
+  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="180" minHeight="0" styleClass="transparent-scroll"><content><FlowPane fx:id="productPane" hgap="12" vgap="12"><padding><Insets bottom="16" left="14" right="14" top="4"/></padding></FlowPane></content></ScrollPane>
+  <VBox minWidth="290" minHeight="0" prefWidth="350" spacing="7" styleClass="cart-panel">
+   <Label styleClass="panel-title" text="Current order"/><ChoiceBox fx:id="orderTypeBox" maxWidth="Infinity"/><ComboBox fx:id="tableBox" maxWidth="Infinity" promptText="Select available table"/>
+   <ListView fx:id="cartList" minHeight="0" prefHeight="115" VBox.vgrow="ALWAYS"/>
+   <FlowPane hgap="8" vgap="6"><Button onAction="#decrease" text="-"/><Button onAction="#increase" text="+"/><Button onAction="#remove" text="Remove"/><Button onAction="#clearCart" text="Clear"/></FlowPane><Separator/>
+   <GridPane hgap="12" vgap="5"><columnConstraints><ColumnConstraints hgrow="ALWAYS"/><ColumnConstraints halignment="RIGHT"/></columnConstraints><Label text="Subtotal"/><Label fx:id="subtotalLabel" GridPane.columnIndex="1"/><Label text="Discount" GridPane.rowIndex="1"/><Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="1"/><Label text="Tax" GridPane.rowIndex="2"/><Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="2"/><Label styleClass="total-label" text="Total" GridPane.rowIndex="3"/><Label fx:id="totalLabel" styleClass="total-label" GridPane.columnIndex="1" GridPane.rowIndex="3"/></GridPane>
+   <Label fx:id="statusLabel" minHeight="24" maxWidth="Infinity" wrapText="true"/><Button fx:id="saveButton" maxWidth="Infinity" onAction="#saveOrder" styleClass="primary-action" text="Save Open Order"/><Label maxWidth="Infinity" styleClass="empty-copy" text="Payment and sale completion are handled separately." wrapText="true"/>
+   <padding><Insets bottom="12" left="14" right="14" top="12"/></padding>
+  </VBox>
+ </SplitPane></center>
+</BorderPane>

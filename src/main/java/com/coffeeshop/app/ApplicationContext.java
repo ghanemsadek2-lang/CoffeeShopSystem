@@ -3,6 +3,7 @@ package com.coffeeshop.app;
 import com.coffeeshop.database.DatabaseConnectionManager;
 import com.coffeeshop.security.ApplicationSession;
 import com.coffeeshop.service.AuthenticationService;
+import javax.sql.DataSource;
 
 import java.util.Objects;
 
@@ -27,6 +28,10 @@ public final class ApplicationContext implements AutoCloseable {
 
     public ApplicationSession session() {
         return session;
+    }
+
+    public DataSource dataSource() {
+        return connectionManager.dataSource();
     }
 
     @Override

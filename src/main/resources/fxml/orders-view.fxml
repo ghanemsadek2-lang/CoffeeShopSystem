@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coffeeshop.controller.OrdersController" minWidth="0" minHeight="0" spacing="12" styleClass="module-root">
+ <FlowPane alignment="CENTER_LEFT" hgap="10" vgap="8"><ChoiceBox fx:id="statusFilter" minWidth="120"/><Button onAction="#refresh" text="Refresh"/><Button fx:id="cancelButton" disable="true" onAction="#cancel" text="Cancel open order"/></FlowPane>
+ <SplitPane dividerPositions="0.68" minWidth="0" minHeight="0" VBox.vgrow="ALWAYS"><TableView fx:id="ordersTable" minWidth="300" minHeight="0"><columns><TableColumn fx:id="numberColumn" prefWidth="120" text="Order"/><TableColumn fx:id="sourceColumn" prefWidth="75" text="Source"/><TableColumn fx:id="typeColumn" prefWidth="95" text="Type"/><TableColumn fx:id="statusColumn" prefWidth="90" text="Status"/><TableColumn fx:id="openedColumn" prefWidth="155" text="Opened"/><TableColumn fx:id="totalColumn" prefWidth="80" text="Total"/><TableColumn fx:id="tableColumn" prefWidth="100" text="Table"/></columns></TableView><VBox minWidth="240" minHeight="0" spacing="10" styleClass="panel-card"><Label styleClass="panel-title" text="Order details"/><Label fx:id="messageLabel" maxWidth="Infinity" wrapText="true"/><ListView fx:id="detailList" minHeight="80" VBox.vgrow="ALWAYS"/></VBox></SplitPane>
+ <padding><Insets bottom="16" left="16" right="16" top="16"/></padding>
+</VBox>

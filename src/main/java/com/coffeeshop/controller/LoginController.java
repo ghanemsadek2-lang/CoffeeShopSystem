@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 /** Coordinates the login view without owning authentication or persistence logic. */
 public final class LoginController implements AutoCloseable {
@@ -34,6 +35,7 @@ public final class LoginController implements AutoCloseable {
     private final AuthenticationService authenticationService;
     private final ApplicationSession session;
     private final ExecutorService authenticationExecutor;
+    private final Consumer<AuthenticatedUser> authenticatedHandler;
 
     @FXML
     private TextField usernameField;
@@ -55,16 +57,19 @@ public final class LoginController implements AutoCloseable {
     private boolean busy;
     private boolean authenticated;
 
-    public LoginController(AuthenticationService authenticationService, ApplicationSession session) {
-        this(authenticationService, session, Executors.newSingleThreadExecutor(
+    public LoginController(AuthenticationService authenticationService, ApplicationSession session,
+                           Consumer<AuthenticatedUser> authenticatedHandler) {
+        this(authenticationService, session, authenticatedHandler, Executors.newSingleThreadExecutor(
                 Thread.ofPlatform().name("authentication-worker").daemon(true).factory()
         ));
     }
 
     LoginController(AuthenticationService authenticationService, ApplicationSession session,
+                    Consumer<AuthenticatedUser> authenticatedHandler,
                     ExecutorService authenticationExecutor) {
         this.authenticationService = Objects.requireNonNull(authenticationService);
         this.session = Objects.requireNonNull(session);
+        this.authenticatedHandler = Objects.requireNonNull(authenticatedHandler);
         this.authenticationExecutor = Objects.requireNonNull(authenticationExecutor);
     }
 
@@ -136,6 +141,7 @@ public final class LoginController implements AutoCloseable {
             authenticated = true;
             updateControlState();
             showStatus("Signed in successfully. Welcome, " + user.displayName() + '.', false);
+            authenticatedHandler.accept(user);
         } catch (RuntimeException exception) {
             LOGGER.error("Authenticated session could not be established ({}).",
                     exception.getClass().getSimpleName());

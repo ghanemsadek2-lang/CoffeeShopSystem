@@ -19,7 +19,7 @@ class LoginControllerTest {
     @Test
     void closesItsReusableAuthenticationExecutor() {
         RecordingExecutor executor = new RecordingExecutor();
-        LoginController controller = new LoginController(authenticationService(), new ApplicationSession(), executor);
+        LoginController controller = new LoginController(authenticationService(), new ApplicationSession(), user -> {}, executor);
 
         controller.close();
 
@@ -31,11 +31,11 @@ class LoginControllerTest {
         RecordingExecutor executor = new RecordingExecutor();
 
         assertThrows(NullPointerException.class,
-                () -> new LoginController(null, new ApplicationSession(), executor));
+                () -> new LoginController(null, new ApplicationSession(), user -> {}, executor));
         assertThrows(NullPointerException.class,
-                () -> new LoginController(authenticationService(), null, executor));
+                () -> new LoginController(authenticationService(), null, user -> {}, executor));
         assertThrows(NullPointerException.class,
-                () -> new LoginController(authenticationService(), new ApplicationSession(), null));
+                () -> new LoginController(authenticationService(), new ApplicationSession(), user -> {}, null));
     }
 
     private static AuthenticationService authenticationService() {

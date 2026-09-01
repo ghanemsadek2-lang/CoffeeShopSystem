@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coffeeshop.controller.ModulePlaceholderController" fitToWidth="true" hbarPolicy="NEVER" minWidth="0" minHeight="0" styleClass="transparent-scroll">
+ <content><StackPane minHeight="420" styleClass="module-root"><VBox alignment="CENTER" maxWidth="560" spacing="10"><Label fx:id="moduleNameLabel" maxWidth="Infinity" styleClass="module-heading" textAlignment="CENTER" wrapText="true"/><Label maxWidth="Infinity" styleClass="empty-copy" text="This module is prepared for a future implementation phase." textAlignment="CENTER" wrapText="true"/></VBox><padding><Insets bottom="24" left="24" right="24" top="24"/></padding></StackPane></content>
+</ScrollPane>

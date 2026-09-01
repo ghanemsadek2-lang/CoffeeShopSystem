@@ -7,6 +7,23 @@
     -fx-background-color: #f7f3ed;
 }
 
+.login-brand-scroll,
+.login-form-scroll {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.login-brand-scroll > .viewport,
+.login-form-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.login-brand-scroll .scroll-bar:vertical,
+.login-form-scroll .scroll-bar:vertical {
+    -fx-pref-width: 9px;
+}
+
 .brand-panel {
     -fx-background-color: #332219;
 }
