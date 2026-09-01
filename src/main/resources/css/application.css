@@ -28,3 +28,15 @@
     -fx-font-size: 14px;
     -fx-text-alignment: center;
 }
+
+.modifier-group-title {
+    -fx-text-fill: #3b2a20;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.modifier-total {
+    -fx-text-fill: #5b3424;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+}

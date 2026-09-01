@@ -1,0 +1,36 @@
+.management-toolbar {
+    -fx-padding: 8 16 12 16;
+}
+
+.detail-pane {
+    -fx-padding: 12;
+    -fx-background-color: #fffdf9;
+}
+
+.management-table {
+    -fx-background-color: #fffdf9;
+}
+
+.table-view {
+    -fx-border-color: #e4d9ce;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #eee5dc;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: #e4d8cd;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 7 14;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #fffdf9;
+}
+
+.tab-pane > .tab-content-area {
+    -fx-background-color: #f6f2ec;
+}

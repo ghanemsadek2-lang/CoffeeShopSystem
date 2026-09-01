@@ -7,12 +7,15 @@ import com.coffeeshop.controller.ModulePlaceholderController;
 import com.coffeeshop.controller.PosController;
 import com.coffeeshop.controller.OrdersController;
 import com.coffeeshop.controller.TablesController;
+import com.coffeeshop.controller.MenuManagementController;
 import com.coffeeshop.model.NavigationItem;
 import com.coffeeshop.security.NavigationPolicy;
 import com.coffeeshop.repository.JdbcPosRepository;
 import com.coffeeshop.repository.JdbcOrderManagementRepository;
+import com.coffeeshop.repository.JdbcMenuManagementRepository;
 import com.coffeeshop.service.PosService;
 import com.coffeeshop.service.OrderManagementService;
+import com.coffeeshop.service.MenuManagementService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -161,7 +164,8 @@ public final class CoffeeShopApplication extends Application {
         String fxml = item == NavigationItem.DASHBOARD ? "/fxml/dashboard-view.fxml"
                 : item == NavigationItem.POS ? "/fxml/pos-view.fxml"
                 : item == NavigationItem.ORDERS ? "/fxml/orders-view.fxml"
-                : item == NavigationItem.TABLES ? "/fxml/tables-view.fxml" : "/fxml/module-placeholder.fxml";
+                : item == NavigationItem.TABLES ? "/fxml/tables-view.fxml"
+                : item == NavigationItem.PRODUCTS ? "/fxml/menu-management-view.fxml" : "/fxml/module-placeholder.fxml";
         FXMLLoader loader = new FXMLLoader(resource(fxml));
         loader.setControllerFactory(type -> {
             if (type == DashboardController.class) {
@@ -173,6 +177,10 @@ public final class CoffeeShopApplication extends Application {
             if (type == PosController.class) {
                 return new PosController(new PosService(new JdbcPosRepository(applicationContext.dataSource())),
                         applicationContext.session());
+            }
+            if (type == MenuManagementController.class) {
+                return new MenuManagementController(new MenuManagementService(
+                        new JdbcMenuManagementRepository(applicationContext.dataSource())));
             }
             OrderManagementService orderService = new OrderManagementService(
                     new JdbcOrderManagementRepository(applicationContext.dataSource()));
