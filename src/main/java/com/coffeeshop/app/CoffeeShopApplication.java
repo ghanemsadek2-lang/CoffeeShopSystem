@@ -17,11 +17,13 @@ import com.coffeeshop.repository.JdbcOrderManagementRepository;
 import com.coffeeshop.repository.JdbcMenuManagementRepository;
 import com.coffeeshop.repository.JdbcInventoryRepository;
 import com.coffeeshop.repository.JdbcRegisterRepository;
+import com.coffeeshop.repository.JdbcCheckoutRepository;
 import com.coffeeshop.service.PosService;
 import com.coffeeshop.service.OrderManagementService;
 import com.coffeeshop.service.MenuManagementService;
 import com.coffeeshop.service.InventoryService;
 import com.coffeeshop.service.RegisterService;
+import com.coffeeshop.service.CheckoutService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -202,7 +204,9 @@ public final class CoffeeShopApplication extends Application {
             OrderManagementService orderService = new OrderManagementService(
                     new JdbcOrderManagementRepository(applicationContext.dataSource()));
             if (type == OrdersController.class) {
-                return new OrdersController(orderService);
+                return new OrdersController(orderService,
+                        new CheckoutService(new JdbcCheckoutRepository(applicationContext.dataSource())),
+                        applicationContext.session());
             }
             if (type == TablesController.class) {
                 return new TablesController(orderService, destination -> mainShellController.navigateTo(destination));
