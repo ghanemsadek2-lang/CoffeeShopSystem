@@ -1,0 +1,1 @@
+package com.coffeeshop.dto;public final class CustomerCommands{private CustomerCommands(){}public record Save(Long id,String firstName,String lastName,String legalName,String taxNumber,String phone,String email,String notes,boolean active,byte[]rowVersion){}}

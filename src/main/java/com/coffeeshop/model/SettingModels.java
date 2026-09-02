@@ -1,0 +1,1 @@
+package com.coffeeshop.model;import java.time.LocalDateTime;public final class SettingModels{private SettingModels(){}public record Setting(long id,String key,String value,String type,String description,String updatedBy,LocalDateTime updatedAt,byte[]version){public Setting{version=version.clone();}@Override public byte[]version(){return version.clone();}}}

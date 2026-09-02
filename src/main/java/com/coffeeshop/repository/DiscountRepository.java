@@ -1,0 +1,1 @@
+package com.coffeeshop.repository;import com.coffeeshop.dto.DiscountCommands;import com.coffeeshop.model.DiscountModels;import java.util.List;public interface DiscountRepository{List<DiscountModels.Discount>find(String search,Boolean active);long save(DiscountCommands.Save q);void setActive(long id,boolean active,byte[]version);}

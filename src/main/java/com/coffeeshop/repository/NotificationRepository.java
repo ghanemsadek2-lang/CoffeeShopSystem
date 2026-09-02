@@ -1,0 +1,1 @@
+package com.coffeeshop.repository;import com.coffeeshop.model.NotificationModels;import java.util.List;public interface NotificationRepository{List<NotificationModels.Notification>find(long userId,Boolean read);void markRead(long id,long userId,byte[]version);int generateLowStockAlerts();}

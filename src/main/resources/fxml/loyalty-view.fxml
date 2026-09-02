@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coffeeshop.controller.LoyaltyController" minWidth="0" minHeight="0" spacing="12" styleClass="module-root">
+ <fx:define><TableView fx:id="resize" fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></fx:define>
+ <Label styleClass="module-heading" text="Loyalty"/>
+ <Label maxWidth="Infinity" wrapText="true" text="Manage customer loyalty accounts and their immutable points history."/>
+ <FlowPane hgap="8" vgap="8"><TextField fx:id="searchField" prefWidth="280" promptText="Search customer or membership"/><Button onAction="#enroll" styleClass="primary-action" text="Enroll customer"/><Button fx:id="earnButton" disable="true" onAction="#earn" text="Earn points"/><Button fx:id="redeemButton" disable="true" onAction="#redeem" text="Redeem points"/><Button onAction="#refresh" text="Refresh"/></FlowPane>
+ <Label fx:id="messageLabel" maxWidth="Infinity" wrapText="true"/>
+ <GridPane minWidth="0" minHeight="0" VBox.vgrow="ALWAYS" hgap="14">
+  <columnConstraints><ColumnConstraints percentWidth="47" hgrow="ALWAYS" minWidth="0"/><ColumnConstraints percentWidth="53" hgrow="ALWAYS" minWidth="0"/></columnConstraints>
+  <children>
+   <VBox minWidth="0" minHeight="0" spacing="6"><Label styleClass="section-heading" text="Loyalty accounts"/><TableView fx:id="accountTable" columnResizePolicy="$resize" minWidth="0" minHeight="0" VBox.vgrow="ALWAYS"><columns><TableColumn fx:id="membershipColumn" prefWidth="125" text="Membership"/><TableColumn fx:id="customerColumn" prefWidth="190" text="Customer"/><TableColumn fx:id="balanceColumn" prefWidth="90" text="Balance"/><TableColumn fx:id="lifetimeColumn" prefWidth="100" text="Lifetime"/><TableColumn fx:id="statusColumn" prefWidth="90" text="Status"/></columns></TableView></VBox>
+   <VBox GridPane.columnIndex="1" minWidth="0" minHeight="0" spacing="6"><Label styleClass="section-heading" text="Points history"/><TableView fx:id="transactionTable" columnResizePolicy="$resize" minWidth="0" minHeight="0" VBox.vgrow="ALWAYS"><columns><TableColumn fx:id="timeColumn" prefWidth="160" text="Occurred"/><TableColumn fx:id="typeColumn" prefWidth="85" text="Type"/><TableColumn fx:id="pointsColumn" prefWidth="85" text="Points"/><TableColumn fx:id="userColumn" prefWidth="115" text="Recorded by"/><TableColumn fx:id="reasonColumn" prefWidth="220" text="Reason"/></columns></TableView></VBox>
+  </children>
+ </GridPane>
+ <padding><Insets bottom="18" left="18" right="18" top="18"/></padding>
+</VBox>

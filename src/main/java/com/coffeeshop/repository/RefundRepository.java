@@ -1,0 +1,1 @@
+package com.coffeeshop.repository;import com.coffeeshop.dto.RefundCommands;import com.coffeeshop.model.RefundModels;public interface RefundRepository{RefundModels.Catalog load();long refund(RefundCommands.Create q);}

@@ -1,0 +1,1 @@
+package com.coffeeshop.dto;import java.math.BigDecimal;import java.time.LocalDateTime;public final class DiscountCommands{private DiscountCommands(){}public record Save(Long id,String code,String name,String type,BigDecimal value,LocalDateTime validFrom,LocalDateTime validUntil,boolean active,byte[]version){}}

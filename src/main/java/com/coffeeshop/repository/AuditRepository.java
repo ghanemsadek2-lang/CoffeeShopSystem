@@ -1,0 +1,1 @@
+package com.coffeeshop.repository;import com.coffeeshop.model.AuditModels;import java.time.LocalDate;import java.util.List;public interface AuditRepository{List<AuditModels.Entry>find(String search,LocalDate from,LocalDate to);}

@@ -13,6 +13,7 @@ public final class NavigationPolicy {
     private static final Set<NavigationItem> CASHIER_ITEMS = Set.copyOf(EnumSet.of(
             NavigationItem.DASHBOARD, NavigationItem.POS, NavigationItem.ORDERS,
             NavigationItem.TABLES, NavigationItem.REGISTERS, NavigationItem.CUSTOMERS
+            , NavigationItem.NOTIFICATIONS
     ));
 
     public Set<NavigationItem> allowedItems(AuthenticatedUser user) {

@@ -4,9 +4,11 @@ import com.coffeeshop.dto.CheckoutCommands;
 import com.coffeeshop.model.CheckoutModels;
 import com.coffeeshop.model.OrderStatus;
 import com.coffeeshop.model.OrderSummary;
+import com.coffeeshop.model.OrderDiscountModels;
 import com.coffeeshop.security.ApplicationSession;
 import com.coffeeshop.service.CheckoutService;
 import com.coffeeshop.service.OrderManagementService;
+import com.coffeeshop.service.OrderDiscountService;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -30,6 +32,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class OrdersController {
     private final OrderManagementService service;
     private final CheckoutService checkoutService;
+    private final OrderDiscountService orderDiscountService;
     private final ApplicationSession session;
     @FXML private ChoiceBox<String> statusFilter;
     @FXML private TableView<OrderSummary> ordersTable;
@@ -38,10 +41,13 @@ public final class OrdersController {
     @FXML private Label messageLabel;
     @FXML private Button cancelButton;
     @FXML private Button checkoutButton;
+    @FXML private Button discountButton;
     public OrdersController(OrderManagementService service, CheckoutService checkoutService,
+                            OrderDiscountService orderDiscountService,
                             ApplicationSession session) {
         this.service = service;
         this.checkoutService = checkoutService;
+        this.orderDiscountService = orderDiscountService;
         this.session = session;
     }
 
@@ -71,6 +77,7 @@ public final class OrdersController {
     private void loadDetails(OrderSummary order) {
         cancelButton.setDisable(order == null || order.status() != OrderStatus.OPEN);
         checkoutButton.setDisable(order == null || order.status() != OrderStatus.OPEN);
+        discountButton.setDisable(order == null || order.status() != OrderStatus.OPEN);
         if (order == null) return;
         CompletableFuture.supplyAsync(() -> service.details(order.id())).whenComplete((details,error) -> Platform.runLater(() -> {
             if (error == null && details.isPresent()) {
@@ -80,6 +87,62 @@ public final class OrdersController {
                         + (value.tableName() == null ? "" : " - " + value.tableName()));
             } else messageLabel.setText("Unable to load order details.");
         }));
+    }
+
+    @FXML private void applyDiscount() {
+        OrderSummary order = ordersTable.getSelectionModel().getSelectedItem();
+        if (order == null || order.status() != OrderStatus.OPEN) return;
+        setActionsDisabled(true);
+        CompletableFuture.supplyAsync(() -> orderDiscountService.prepare(order.id()))
+                .whenComplete((context, error) -> Platform.runLater(() -> {
+                    setActionsDisabled(false);
+                    if (error != null) {
+                        messageLabel.setText(userMessage(error, "Unable to load available discounts."));
+                        return;
+                    }
+                    discountDialog(context).ifPresent(discount -> {
+                        setActionsDisabled(true);
+                        CompletableFuture.runAsync(() -> orderDiscountService.apply(context, discount))
+                                .whenComplete((ignored, applyError) -> Platform.runLater(() -> {
+                                    setActionsDisabled(false);
+                                    if (applyError == null) {
+                                        messageLabel.setText("Discount applied to " + order.number() + ".");
+                                        refresh();
+                                    } else messageLabel.setText(userMessage(applyError, "Unable to apply the discount."));
+                                }));
+                    });
+                }));
+    }
+
+    private Optional<OrderDiscountModels.DiscountOption> discountDialog(OrderDiscountModels.Context context) {
+        Dialog<OrderDiscountModels.DiscountOption> dialog = new Dialog<>();
+        dialog.setTitle("Apply discount");
+        dialog.setHeaderText(context.orderNumber() + "   Current total " + money(context.total()));
+        ButtonType apply = new ButtonType("Apply discount", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL, apply);
+        ComboBox<OrderDiscountModels.DiscountOption> discounts = new ComboBox<>();
+        discounts.getItems().setAll(context.available());
+        discounts.setPromptText("Select an eligible discount");
+        discounts.setMaxWidth(Double.MAX_VALUE);
+        ListView<String> applied = new ListView<>();
+        applied.getItems().setAll(context.applied().stream().map(value ->
+                value.sequence() + ". " + value.name() + " - " + money(value.appliedAmount())).toList());
+        applied.setPrefHeight(100);
+        Label summary = new Label("Subtotal " + money(context.subtotal()) + "   Discounts "
+                + money(context.discount()) + "   Tax " + money(context.tax()) + "   Total " + money(context.total()));
+        summary.setWrapText(true);
+        VBox content = new VBox(8, new Label("Eligible discount"), discounts,
+                new Label("Already applied"), applied, summary);
+        content.setPadding(new Insets(4));
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().setPrefWidth(520);
+        Node applyButton = dialog.getDialogPane().lookupButton(apply);
+        applyButton.disableProperty().bind(discounts.valueProperty().isNull());
+        dialog.setResultConverter(button -> button == apply ? discounts.getValue() : null);
+        if (context.available().isEmpty()) {
+            applied.setPlaceholder(new Label("No discounts have been applied."));
+        }
+        return dialog.showAndWait();
     }
 
     @FXML private void checkout() {
@@ -197,6 +260,7 @@ public final class OrdersController {
         OrderSummary selected = ordersTable.getSelectionModel().getSelectedItem();
         boolean unavailable = selected == null || selected.status() != OrderStatus.OPEN;
         checkoutButton.setDisable(disabled || unavailable);
+        discountButton.setDisable(disabled || unavailable);
         cancelButton.setDisable(disabled || unavailable);
     }
 

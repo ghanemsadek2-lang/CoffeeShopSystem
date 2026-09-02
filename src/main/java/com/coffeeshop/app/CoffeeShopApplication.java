@@ -10,20 +10,61 @@ import com.coffeeshop.controller.TablesController;
 import com.coffeeshop.controller.MenuManagementController;
 import com.coffeeshop.controller.InventoryManagementController;
 import com.coffeeshop.controller.RegisterManagementController;
+import com.coffeeshop.controller.ReservationsController;
+import com.coffeeshop.controller.CustomerManagementController;
+import com.coffeeshop.controller.EmployeeManagementController;
+import com.coffeeshop.controller.PurchasingController;
+import com.coffeeshop.controller.ExpenseController;
+import com.coffeeshop.controller.ReportsController;
+import com.coffeeshop.controller.SettingsController;
+import com.coffeeshop.controller.DiscountController;
+import com.coffeeshop.controller.DocumentsController;
+import com.coffeeshop.controller.NotificationsController;
+import com.coffeeshop.controller.AuditController;
+import com.coffeeshop.controller.RefundController;
+import com.coffeeshop.controller.LoyaltyController;
 import com.coffeeshop.model.NavigationItem;
 import com.coffeeshop.security.NavigationPolicy;
 import com.coffeeshop.repository.JdbcPosRepository;
 import com.coffeeshop.repository.JdbcOrderManagementRepository;
+import com.coffeeshop.repository.JdbcOrderDiscountRepository;
 import com.coffeeshop.repository.JdbcMenuManagementRepository;
 import com.coffeeshop.repository.JdbcInventoryRepository;
 import com.coffeeshop.repository.JdbcRegisterRepository;
 import com.coffeeshop.repository.JdbcCheckoutRepository;
+import com.coffeeshop.repository.JdbcTableManagementRepository;
+import com.coffeeshop.repository.JdbcCustomerRepository;
+import com.coffeeshop.repository.JdbcEmployeeRepository;
+import com.coffeeshop.repository.JdbcPurchasingRepository;
+import com.coffeeshop.repository.JdbcExpenseRepository;
+import com.coffeeshop.repository.JdbcReportRepository;
+import com.coffeeshop.repository.JdbcSettingRepository;
+import com.coffeeshop.repository.JdbcDiscountRepository;
+import com.coffeeshop.repository.JdbcDocumentRepository;
+import com.coffeeshop.repository.JdbcNotificationRepository;
+import com.coffeeshop.repository.JdbcAuditRepository;
+import com.coffeeshop.repository.JdbcRefundRepository;
+import com.coffeeshop.repository.JdbcLoyaltyRepository;
 import com.coffeeshop.service.PosService;
 import com.coffeeshop.service.OrderManagementService;
+import com.coffeeshop.service.OrderDiscountService;
 import com.coffeeshop.service.MenuManagementService;
 import com.coffeeshop.service.InventoryService;
 import com.coffeeshop.service.RegisterService;
 import com.coffeeshop.service.CheckoutService;
+import com.coffeeshop.service.TableManagementService;
+import com.coffeeshop.service.CustomerService;
+import com.coffeeshop.service.EmployeeService;
+import com.coffeeshop.service.PurchasingService;
+import com.coffeeshop.service.ExpenseService;
+import com.coffeeshop.service.ReportService;
+import com.coffeeshop.service.SettingService;
+import com.coffeeshop.service.DiscountService;
+import com.coffeeshop.service.DocumentService;
+import com.coffeeshop.service.NotificationService;
+import com.coffeeshop.service.AuditService;
+import com.coffeeshop.service.RefundService;
+import com.coffeeshop.service.LoyaltyService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -176,6 +217,18 @@ public final class CoffeeShopApplication extends Application {
                 : item == NavigationItem.PRODUCTS ? "/fxml/menu-management-view.fxml"
                 : item == NavigationItem.INVENTORY ? "/fxml/inventory-management-view.fxml"
                 : item == NavigationItem.REGISTERS ? "/fxml/register-management-view.fxml"
+                : item == NavigationItem.CUSTOMERS ? "/fxml/customer-management-view.fxml"
+                : item == NavigationItem.LOYALTY ? "/fxml/loyalty-view.fxml"
+                : item == NavigationItem.EMPLOYEES ? "/fxml/employee-management-view.fxml"
+                : item == NavigationItem.PURCHASING ? "/fxml/purchasing-view.fxml"
+                : item == NavigationItem.EXPENSES ? "/fxml/expenses-view.fxml"
+                : item == NavigationItem.DISCOUNTS ? "/fxml/discounts-view.fxml"
+                : item == NavigationItem.DOCUMENTS ? "/fxml/documents-view.fxml"
+                : item == NavigationItem.REFUNDS ? "/fxml/refunds-view.fxml"
+                : item == NavigationItem.NOTIFICATIONS ? "/fxml/notifications-view.fxml"
+                : item == NavigationItem.AUDIT_LOG ? "/fxml/audit-view.fxml"
+                : item == NavigationItem.REPORTS ? "/fxml/reports-view.fxml"
+                : item == NavigationItem.SETTINGS ? "/fxml/settings-view.fxml"
                 : "/fxml/module-placeholder.fxml";
         FXMLLoader loader = new FXMLLoader(resource(fxml));
         loader.setControllerFactory(type -> {
@@ -206,10 +259,74 @@ public final class CoffeeShopApplication extends Application {
             if (type == OrdersController.class) {
                 return new OrdersController(orderService,
                         new CheckoutService(new JdbcCheckoutRepository(applicationContext.dataSource())),
+                        new OrderDiscountService(new JdbcOrderDiscountRepository(applicationContext.dataSource())),
                         applicationContext.session());
             }
             if (type == TablesController.class) {
-                return new TablesController(orderService, destination -> mainShellController.navigateTo(destination));
+                return new TablesController(new TableManagementService(
+                        new JdbcTableManagementRepository(applicationContext.dataSource())),
+                        destination -> mainShellController.navigateTo(destination));
+            }
+            if (type == ReservationsController.class) {
+                return new ReservationsController(new TableManagementService(
+                        new JdbcTableManagementRepository(applicationContext.dataSource())),
+                        new CustomerService(new JdbcCustomerRepository(applicationContext.dataSource())));
+            }
+            if (type == CustomerManagementController.class) {
+                return new CustomerManagementController(new CustomerService(
+                        new JdbcCustomerRepository(applicationContext.dataSource())));
+            }
+            if (type == LoyaltyController.class) {
+                return new LoyaltyController(new LoyaltyService(
+                        new JdbcLoyaltyRepository(applicationContext.dataSource())),
+                        applicationContext.session());
+            }
+            if (type == EmployeeManagementController.class) {
+                return new EmployeeManagementController(new EmployeeService(
+                        new JdbcEmployeeRepository(applicationContext.dataSource())),
+                        applicationContext.session());
+            }
+            if (type == PurchasingController.class) {
+                return new PurchasingController(new PurchasingService(
+                        new JdbcPurchasingRepository(applicationContext.dataSource())),
+                        applicationContext.session());
+            }
+            if (type == ExpenseController.class) {
+                return new ExpenseController(new ExpenseService(
+                        new JdbcExpenseRepository(applicationContext.dataSource())),
+                        applicationContext.session());
+            }
+            if (type == ReportsController.class) {
+                return new ReportsController(new ReportService(
+                        new JdbcReportRepository(applicationContext.dataSource())));
+            }
+            if (type == SettingsController.class) {
+                return new SettingsController(new SettingService(
+                        new JdbcSettingRepository(applicationContext.dataSource())),
+                        applicationContext.session());
+            }
+            if (type == DiscountController.class) {
+                return new DiscountController(new DiscountService(
+                        new JdbcDiscountRepository(applicationContext.dataSource())));
+            }
+            if (type == DocumentsController.class) {
+                return new DocumentsController(new DocumentService(
+                        new JdbcDocumentRepository(applicationContext.dataSource())),
+                        applicationContext.session());
+            }
+            if (type == NotificationsController.class) {
+                return new NotificationsController(new NotificationService(
+                        new JdbcNotificationRepository(applicationContext.dataSource())),
+                        applicationContext.session());
+            }
+            if (type == AuditController.class) {
+                return new AuditController(new AuditService(
+                        new JdbcAuditRepository(applicationContext.dataSource())));
+            }
+            if (type == RefundController.class) {
+                return new RefundController(new RefundService(
+                        new JdbcRefundRepository(applicationContext.dataSource())),
+                        applicationContext.session());
             }
             throw unsupportedController(type);
         });

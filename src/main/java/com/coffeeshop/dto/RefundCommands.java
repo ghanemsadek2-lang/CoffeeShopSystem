@@ -1,0 +1,1 @@
+package com.coffeeshop.dto;import java.math.BigDecimal;public final class RefundCommands{private RefundCommands(){}public record Create(long paymentId,BigDecimal amount,String reason,String reference,String notes,long userId,byte[]paymentVersion){}}

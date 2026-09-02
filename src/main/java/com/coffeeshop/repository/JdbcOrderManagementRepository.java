@@ -45,6 +45,10 @@ public final class JdbcOrderManagementRepository implements OrderManagementRepos
             SELECT COUNT(*),COALESCE(SUM(CASE WHEN status IN ('COMPLETED','PARTIALLY_REFUNDED','REFUNDED') THEN amount-refunded_amount ELSE 0 END),0)
             FROM dbo.payments WHERE order_id=?
             """;
+        String discounts="""
+            SELECT application_sequence,discount_name_snapshot,applied_discount_amount
+            FROM dbo.order_discounts WHERE order_id=? ORDER BY application_sequence
+            """;
         try (Connection connection=dataSource.getConnection(); PreparedStatement statement=connection.prepareStatement(head)) {
             statement.setLong(1,orderId);
             try (ResultSet results=statement.executeQuery()) {
@@ -65,6 +69,13 @@ public final class JdbcOrderManagementRepository implements OrderManagementRepos
                     try (ResultSet paymentResults=paymentStatement.executeQuery()) {
                         paymentResults.next(); int count=paymentResults.getInt(1);
                         lines.add(count==0 ? "Payments: none recorded" : "Payments: "+count+" - net "+paymentResults.getBigDecimal(2).setScale(2,RoundingMode.HALF_UP));
+                    }
+                }
+                try (PreparedStatement discountStatement=connection.prepareStatement(discounts)) {
+                    discountStatement.setLong(1,orderId);
+                    try (ResultSet discountResults=discountStatement.executeQuery()) {
+                        while(discountResults.next()) lines.add("Discount "+discountResults.getInt(1)+": "
+                                +discountResults.getString(2)+" - "+discountResults.getBigDecimal(3).setScale(2,RoundingMode.HALF_UP));
                     }
                 }
                 return Optional.of(new OrderDetails(summary,List.copyOf(lines)));

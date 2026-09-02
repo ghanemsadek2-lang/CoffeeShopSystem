@@ -1,7 +1,6 @@
 package com.coffeeshop.validation;
 
 import com.coffeeshop.dto.MenuCommands;
-import java.math.BigDecimal;
 
 /** Central schema-aligned validation and normalization for menu administration. */
 public final class MenuValidator {

@@ -1,0 +1,1 @@
+package com.coffeeshop.repository;import com.coffeeshop.dto.ExpenseCommands;import com.coffeeshop.model.ExpenseModels;public interface ExpenseRepository{ExpenseModels.Catalog load();long saveCategory(ExpenseCommands.Category q);void setCategoryActive(long id,boolean active,byte[]version);long saveExpense(ExpenseCommands.Expense q,long userId);}

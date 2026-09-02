@@ -10,9 +10,15 @@ public enum NavigationItem {
     INVENTORY("Inventory"),
     REGISTERS("Register / Shifts"),
     CUSTOMERS("Customers"),
+    LOYALTY("Loyalty"),
     EMPLOYEES("Employees / Users"),
     PURCHASING("Suppliers / Purchases"),
     EXPENSES("Expenses"),
+    DISCOUNTS("Discounts"),
+    DOCUMENTS("Receipts / Invoices"),
+    REFUNDS("Refunds"),
+    NOTIFICATIONS("Notifications"),
+    AUDIT_LOG("Audit Log"),
     REPORTS("Reports"),
     SETTINGS("Settings");
 

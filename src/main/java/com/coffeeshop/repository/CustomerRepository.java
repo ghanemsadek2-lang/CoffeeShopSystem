@@ -1,0 +1,1 @@
+package com.coffeeshop.repository;import com.coffeeshop.dto.CustomerCommands;import com.coffeeshop.model.CustomerModels;import java.util.List;public interface CustomerRepository{List<CustomerModels.Customer>find(String search,Boolean active);List<CustomerModels.Option>activeOptions();long save(CustomerCommands.Save value);void setActive(long id,boolean active,byte[]version);}

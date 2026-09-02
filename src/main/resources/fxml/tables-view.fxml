@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?>
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coffeeshop.controller.TablesController" minWidth="0" minHeight="0" spacing="14" styleClass="module-root">
- <BorderPane><center><VBox minWidth="0" spacing="3"><Label styleClass="module-heading" text="Cafe tables"/><Label maxWidth="Infinity" styleClass="module-subheading" text="Select an available table to start an order, or an occupied table to view orders." wrapText="true"/></VBox></center><right><Button onAction="#refresh" text="Refresh" BorderPane.alignment="TOP_RIGHT"/></right></BorderPane>
- <Label fx:id="messageLabel" maxWidth="Infinity" wrapText="true"/><ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0" VBox.vgrow="ALWAYS" styleClass="transparent-scroll"><content><FlowPane fx:id="tablePane" hgap="14" vgap="14"><padding><Insets bottom="8" right="8"/></padding></FlowPane></content></ScrollPane>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coffeeshop.controller.TablesController" minWidth="0" minHeight="0" spacing="12" styleClass="module-root">
+ <fx:define><TableView fx:id="constrainedResizePolicy" fx:constant="CONSTRAINED_RESIZE_POLICY"/></fx:define>
+ <BorderPane><center><VBox spacing="3"><Label styleClass="module-heading" text="Cafe tables"/><Label styleClass="module-subheading" text="Monitor dine-in tables, manage POS availability, and schedule reservations."/></VBox></center><right><Button onAction="#refresh" text="Refresh"/></right></BorderPane>
+ <Label fx:id="messageLabel" maxWidth="Infinity" wrapText="true"/>
+ <TabPane minWidth="0" minHeight="0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS"><tabs>
+  <Tab text="Table overview"><ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0" styleClass="transparent-scroll"><content><FlowPane fx:id="tablePane" hgap="14" vgap="14"><padding><Insets bottom="8" right="8" top="8"/></padding></FlowPane></content></ScrollPane></Tab>
+  <Tab text="Manage tables"><VBox minWidth="0" minHeight="0" spacing="10"><HBox spacing="8"><Button onAction="#addTable" styleClass="primary-action" text="Add table"/><Button fx:id="editButton" disable="true" onAction="#editTable" text="Edit"/><Button fx:id="activeButton" disable="true" onAction="#toggleActive" text="Deactivate"/></HBox><TableView fx:id="managementTable" columnResizePolicy="$constrainedResizePolicy" minWidth="0" minHeight="0" VBox.vgrow="ALWAYS"><columns><TableColumn fx:id="codeColumn" prefWidth="100" text="Code"/><TableColumn fx:id="nameColumn" prefWidth="220" text="Table"/><TableColumn fx:id="capacityColumn" prefWidth="100" text="Capacity"/><TableColumn fx:id="statusColumn" prefWidth="160" text="Status"/><TableColumn fx:id="activeColumn" prefWidth="110" text="Availability"/></columns></TableView><padding><Insets top="8"/></padding></VBox></Tab>
+  <Tab text="Reservations"><fx:include source="reservations-view.fxml"/></Tab>
+ </tabs></TabPane>
  <padding><Insets bottom="18" left="18" right="18" top="18"/></padding>
 </VBox>

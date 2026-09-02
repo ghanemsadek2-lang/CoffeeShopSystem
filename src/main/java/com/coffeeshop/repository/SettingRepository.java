@@ -1,0 +1,1 @@
+package com.coffeeshop.repository;import com.coffeeshop.dto.SettingCommands;import com.coffeeshop.model.SettingModels;import java.util.List;public interface SettingRepository{List<SettingModels.Setting>find(String search);long save(SettingCommands.Save q,long userId);}

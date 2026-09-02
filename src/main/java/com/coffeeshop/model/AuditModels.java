@@ -1,0 +1,1 @@
+package com.coffeeshop.model;import java.time.LocalDateTime;public final class AuditModels{private AuditModels(){}public record Entry(long id,String username,String action,String entityType,Long entityId,String beforeData,String afterData,String details,String reason,LocalDateTime occurredAt){}}
