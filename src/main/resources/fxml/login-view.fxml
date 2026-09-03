@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?><?import javafx.scene.control.*?><?import javafx.scene.layout.*?><?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?><?import javafx.scene.control.*?><?import javafx.scene.image.Image?><?import javafx.scene.image.ImageView?><?import javafx.scene.layout.*?>
 <GridPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coffeeshop.controller.LoginController" minWidth="0" minHeight="0" styleClass="login-root">
- <columnConstraints><ColumnConstraints percentWidth="43"/><ColumnConstraints percentWidth="57"/></columnConstraints>
- <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0" pannable="true" styleClass="login-brand-scroll">
-  <content><StackPane minHeight="500" styleClass="brand-panel"><VBox alignment="CENTER_LEFT" maxWidth="360" spacing="22" StackPane.alignment="CENTER">
-   <HBox alignment="CENTER_LEFT" spacing="12"><StackPane minHeight="48" minWidth="48" prefHeight="48" prefWidth="48" styleClass="brand-mark"><Label styleClass="brand-mark-text" text="C"/></StackPane><VBox spacing="1"><Label styleClass="brand-name" text="COFFEE SHOP"/><Label styleClass="brand-product" text="POS &amp; MANAGEMENT"/></VBox></HBox>
-   <StackPane minHeight="180" prefHeight="190" styleClass="coffee-art"><Circle radius="68" styleClass="coffee-art-halo"/><Arc length="260" radiusX="50" radiusY="40" startAngle="140" styleClass="coffee-cup"/><Line endX="-10" endY="-24" startX="-20" startY="-48" styleClass="steam-line" translateX="-10"/><Line endX="10" endY="-24" startX="20" startY="-48" styleClass="steam-line" translateX="10"/></StackPane>
-   <VBox spacing="8"><Label maxWidth="Infinity" styleClass="brand-headline" text="Craft every service moment." wrapText="true"/><Label maxWidth="Infinity" styleClass="brand-tagline" text="Secure access to your coffee shop operations, built for calm and confident service." wrapText="true"/></VBox>
-  </VBox><padding><Insets bottom="34" left="38" right="38" top="34"/></padding></StackPane></content>
+ <columnConstraints><ColumnConstraints percentWidth="46"/><ColumnConstraints percentWidth="54"/></columnConstraints>
+ <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="Infinity" maxWidth="Infinity" minHeight="0" pannable="true" styleClass="login-brand-scroll" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+  <content><StackPane minHeight="440" styleClass="brand-panel"><VBox alignment="CENTER_LEFT" maxWidth="380" spacing="18" StackPane.alignment="CENTER">
+   <HBox alignment="CENTER_LEFT" spacing="12"><StackPane minHeight="48" minWidth="48" prefHeight="48" prefWidth="48" styleClass="brand-mark"><ImageView fitHeight="31" fitWidth="31" preserveRatio="true" smooth="true"><image><Image url="@../images/login-brand-logo.png"/></image></ImageView></StackPane><VBox spacing="1"><Label styleClass="brand-name" text="SADEK COFFEE"/><Label styleClass="brand-product" text="SHOP MANAGEMENT SYSTEM"/></VBox></HBox>
+   <VBox spacing="8"><StackPane minHeight="178" prefHeight="190" styleClass="coffee-art"><ImageView fitHeight="184" fitWidth="340" preserveRatio="true" smooth="true" styleClass="coffee-image"><image><Image url="@../images/login-coffee.png"/></image></ImageView></StackPane><VBox spacing="8"><Label maxWidth="Infinity" styleClass="brand-headline" text="Manage every coffee moment." wrapText="true"/><Label maxWidth="Infinity" styleClass="brand-tagline" text="Simple, reliable tools for smooth coffee shop operations." wrapText="true"/></VBox></VBox>
+  </VBox><padding><Insets bottom="30" left="38" right="38" top="30"/></padding></StackPane></content>
  </ScrollPane>
- <ScrollPane fitToWidth="true" GridPane.columnIndex="1" hbarPolicy="NEVER" minHeight="0" pannable="true" styleClass="login-form-scroll">
-  <content><StackPane minHeight="500" styleClass="form-panel"><VBox maxWidth="430" spacing="18" styleClass="login-card">
+ <ScrollPane fitToHeight="true" fitToWidth="true" GridPane.columnIndex="1" hbarPolicy="NEVER" maxHeight="Infinity" maxWidth="Infinity" minHeight="0" pannable="true" styleClass="login-form-scroll" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+  <content><StackPane minHeight="440" styleClass="form-panel"><VBox maxWidth="470" spacing="20" styleClass="login-card">
    <VBox spacing="7"><Label styleClass="eyebrow" text="SECURE ACCESS"/><Label maxWidth="Infinity" styleClass="welcome-title" text="Welcome back" wrapText="true"/><Label maxWidth="Infinity" styleClass="welcome-copy" text="Sign in to continue to Coffee Shop Management." wrapText="true"/></VBox>
-   <VBox spacing="8"><Label styleClass="field-label" text="Username"/><TextField fx:id="usernameField" accessibleText="Username" maxWidth="Infinity" promptText="Enter your username" styleClass="login-field"/></VBox>
-   <VBox spacing="8"><Label styleClass="field-label" text="Password"/><StackPane fx:id="passwordContainer"><PasswordField fx:id="passwordField" accessibleText="Password" maxWidth="Infinity" onAction="#signIn" promptText="Enter your password" styleClass="login-field"/><TextField fx:id="visiblePasswordField" accessibleText="Visible password" managed="false" maxWidth="Infinity" onAction="#signIn" promptText="Enter your password" styleClass="login-field" visible="false"/></StackPane><CheckBox fx:id="showPasswordCheckBox" mnemonicParsing="false" styleClass="show-password" text="Show password"/></VBox>
-   <Label fx:id="statusLabel" minHeight="38" maxWidth="Infinity" styleClass="status-message" wrapText="true"/>
+   <VBox spacing="9"><Label styleClass="field-label" text="Username"/><TextField fx:id="usernameField" accessibleText="Username" maxWidth="Infinity" promptText="Enter your username" styleClass="login-field"/></VBox>
+   <VBox spacing="10"><Label styleClass="field-label" text="Password"/><StackPane fx:id="passwordContainer"><PasswordField fx:id="passwordField" accessibleText="Password" maxWidth="Infinity" onAction="#signIn" promptText="Enter your password" styleClass="login-field"/><TextField fx:id="visiblePasswordField" accessibleText="Visible password" managed="false" maxWidth="Infinity" onAction="#signIn" promptText="Enter your password" styleClass="login-field" visible="false"/></StackPane><CheckBox fx:id="showPasswordCheckBox" mnemonicParsing="false" styleClass="show-password" text="Show password"/></VBox>
+   <Label fx:id="statusLabel" minHeight="30" maxWidth="Infinity" styleClass="status-message" wrapText="true"/>
    <Button fx:id="signInButton" accessibleText="Sign in" defaultButton="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#signIn" styleClass="sign-in-button" text="Sign In"/>
    <HBox alignment="CENTER" minHeight="26" spacing="10"><ProgressIndicator fx:id="progressIndicator" managed="false" maxHeight="20" maxWidth="20" minHeight="20" minWidth="20" prefHeight="20" prefWidth="20" progress="-1" visible="false"/><Label styleClass="security-note" text="Protected authentication"/></HBox>
-  </VBox><padding><Insets bottom="34" left="42" right="42" top="34"/></padding></StackPane></content>
+  </VBox><padding><Insets bottom="30" left="38" right="38" top="30"/></padding></StackPane></content>
  </ScrollPane>
 </GridPane>
+

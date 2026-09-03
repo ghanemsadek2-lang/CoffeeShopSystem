@@ -7,36 +7,46 @@
     -fx-background-color: #f7f3ed;
 }
 
-.login-brand-scroll,
-.login-form-scroll {
-    -fx-background-color: transparent;
+.login-brand-scroll {
+    -fx-background-color: #332219;
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
 
 .login-brand-scroll > .viewport,
+.login-brand-scroll > .corner {
+    -fx-background-color: #332219;
+}
+
+.login-form-scroll {
+    -fx-background-color: #f7f3ed;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
 .login-form-scroll > .viewport {
-    -fx-background-color: transparent;
+    -fx-background-color: #f7f3ed;
 }
 
 .login-brand-scroll .scroll-bar:vertical,
 .login-form-scroll .scroll-bar:vertical {
-    -fx-pref-width: 9px;
+    -fx-pref-width: 8px;
 }
 
 .brand-panel {
-    -fx-background-color: #332219;
+    -fx-background-color: linear-gradient(
+        to bottom right,
+        #332219 0%,
+        #332219 82%,
+        #3d281f 90%,
+        #7a4d34 96%,
+        #4f3428 100%
+    );
 }
 
 .brand-mark {
     -fx-background-color: #c8955c;
     -fx-background-radius: 14px;
-}
-
-.brand-mark-text {
-    -fx-text-fill: #fffaf3;
-    -fx-font-size: 25px;
-    -fx-font-weight: bold;
 }
 
 .brand-name {
@@ -53,29 +63,12 @@
 }
 
 .coffee-art {
-    -fx-background-color: rgba(255, 250, 243, 0.035);
-    -fx-background-radius: 28px;
-    -fx-border-color: rgba(255, 250, 243, 0.08);
-    -fx-border-radius: 28px;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
 }
 
-.coffee-art-halo {
-    -fx-fill: rgba(200, 149, 92, 0.11);
-    -fx-stroke: rgba(200, 149, 92, 0.28);
-    -fx-stroke-width: 1.5px;
-}
-
-.coffee-cup {
-    -fx-fill: transparent;
-    -fx-stroke: #d7aa76;
-    -fx-stroke-width: 5px;
-    -fx-stroke-line-cap: round;
-}
-
-.steam-line {
-    -fx-stroke: rgba(255, 250, 243, 0.65);
-    -fx-stroke-width: 3px;
-    -fx-stroke-line-cap: round;
+.coffee-image {
+    -fx-effect: dropshadow(gaussian, rgba(15, 8, 4, 0.22), 16, 0.10, 0, 6);
 }
 
 .brand-headline {
@@ -85,7 +78,7 @@
 }
 
 .brand-tagline {
-    -fx-text-fill: #cfc1b6;
+    -fx-text-fill: #ded2c8;
     -fx-font-size: 14px;
     -fx-line-spacing: 4px;
 }
@@ -100,7 +93,7 @@
     -fx-border-color: #e7ded3;
     -fx-border-radius: 22px;
     -fx-effect: dropshadow(gaussian, rgba(55, 38, 26, 0.12), 32, 0.16, 0, 10);
-    -fx-padding: 42px 46px;
+    -fx-padding: 40px 44px;
 }
 
 .welcome-title {
@@ -110,8 +103,9 @@
 }
 
 .welcome-copy {
-    -fx-text-fill: #74685f;
+    -fx-text-fill: #665a51;
     -fx-font-size: 14px;
+    -fx-line-spacing: 2px;
 }
 
 .field-label {
@@ -141,8 +135,8 @@
 }
 
 .show-password {
-    -fx-text-fill: #675b52;
-    -fx-font-size: 12px;
+    -fx-text-fill: #594d45;
+    -fx-font-size: 13px;
 }
 
 .show-password .box {
@@ -200,6 +194,6 @@
 }
 
 .security-note {
-    -fx-text-fill: #8a7e74;
+    -fx-text-fill: #75685e;
     -fx-font-size: 11px;
 }
