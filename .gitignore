@@ -18,6 +18,7 @@ Desktop.ini
 # Runtime files
 *.log
 logs/
+scripts/
 
 # Local configuration and secrets
 application.properties
