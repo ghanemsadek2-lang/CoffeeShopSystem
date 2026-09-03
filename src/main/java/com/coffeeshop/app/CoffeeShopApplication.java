@@ -45,6 +45,7 @@ import com.coffeeshop.repository.JdbcNotificationRepository;
 import com.coffeeshop.repository.JdbcAuditRepository;
 import com.coffeeshop.repository.JdbcRefundRepository;
 import com.coffeeshop.repository.JdbcLoyaltyRepository;
+import com.coffeeshop.repository.JdbcDashboardRepository;
 import com.coffeeshop.service.PosService;
 import com.coffeeshop.service.OrderManagementService;
 import com.coffeeshop.service.OrderDiscountService;
@@ -65,6 +66,7 @@ import com.coffeeshop.service.NotificationService;
 import com.coffeeshop.service.AuditService;
 import com.coffeeshop.service.RefundService;
 import com.coffeeshop.service.LoyaltyService;
+import com.coffeeshop.service.DashboardService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -233,7 +235,9 @@ public final class CoffeeShopApplication extends Application {
         FXMLLoader loader = new FXMLLoader(resource(fxml));
         loader.setControllerFactory(type -> {
             if (type == DashboardController.class) {
-                return new DashboardController(destination -> mainShellController.navigateTo(destination));
+                return new DashboardController(new DashboardService(
+                        new JdbcDashboardRepository(applicationContext.dataSource())),
+                        destination -> mainShellController.navigateTo(destination));
             }
             if (type == ModulePlaceholderController.class) {
                 return new ModulePlaceholderController(item.label());
