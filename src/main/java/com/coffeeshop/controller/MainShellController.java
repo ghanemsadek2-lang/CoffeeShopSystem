@@ -28,6 +28,7 @@ public final class MainShellController {
     @FXML private VBox navigationBox;
     @FXML private StackPane contentHost;
     @FXML private Label pageTitleLabel;
+    @FXML private Label workspaceLabel;
     @FXML private Label userNameLabel;
     @FXML private Label userRoleLabel;
 
@@ -46,10 +47,17 @@ public final class MainShellController {
         userNameLabel.setText(user.displayName());
         userRoleLabel.setText(user.roles().stream().map(role -> role.name()).sorted()
                 .findFirst().orElse("Team Member"));
+        if (navigationPolicy.isCashierWorkspace(user)) {
+            workspaceLabel.setText("Cashier Workspace");
+            workspaceLabel.getStyleClass().add("cashier-workspace");
+        } else if (navigationPolicy.isManagerWorkspace(user)) {
+            workspaceLabel.setText("Manager Workspace");
+            workspaceLabel.getStyleClass().add("manager-workspace");
+        }
         navigationPolicy.allowedItems(user).stream()
                 .sorted(java.util.Comparator.comparingInt(Enum::ordinal))
                 .forEach(this::addNavigationButton);
-        navigateTo(NavigationItem.DASHBOARD);
+        navigateTo(navigationPolicy.defaultItem(user));
     }
 
     private void addNavigationButton(NavigationItem item) {

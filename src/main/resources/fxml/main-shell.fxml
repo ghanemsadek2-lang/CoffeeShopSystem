@@ -7,6 +7,6 @@
   <bottom><VBox minHeight="92" spacing="3" styleClass="user-block"><Label fx:id="userNameLabel" maxWidth="Infinity" styleClass="user-name" textOverrun="ELLIPSIS"/><Label fx:id="userRoleLabel" maxWidth="Infinity" styleClass="user-role" textOverrun="ELLIPSIS"/><Button maxWidth="Infinity" mnemonicParsing="false" onAction="#logout" styleClass="logout-button" text="Sign out"/></VBox></bottom>
   <padding><Insets bottom="16" left="14" right="14" top="20"/></padding>
  </BorderPane></left>
- <top><HBox alignment="CENTER_LEFT" spacing="14" styleClass="topbar"><Label fx:id="pageTitleLabel" minWidth="0" styleClass="page-title"/><Region HBox.hgrow="ALWAYS"/><Label maxWidth="220" styleClass="environment-label" text="Coffee Shop Operations" textOverrun="ELLIPSIS"/><padding><Insets bottom="14" left="22" right="22" top="14"/></padding></HBox></top>
+ <top><HBox alignment="CENTER_LEFT" spacing="14" styleClass="topbar"><Label fx:id="pageTitleLabel" minWidth="0" styleClass="page-title"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="workspaceLabel" maxWidth="220" styleClass="environment-label" text="Coffee Shop Operations" textOverrun="ELLIPSIS"/><padding><Insets bottom="14" left="22" right="22" top="14"/></padding></HBox></top>
  <center><StackPane fx:id="contentHost" minWidth="0" minHeight="0" styleClass="content-host"/></center>
 </BorderPane>

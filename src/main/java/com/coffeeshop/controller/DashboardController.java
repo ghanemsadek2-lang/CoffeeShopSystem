@@ -1,7 +1,9 @@
 package com.coffeeshop.controller;
 
 import com.coffeeshop.model.DashboardModels;
+import com.coffeeshop.model.AuthenticatedUser;
 import com.coffeeshop.model.NavigationItem;
+import com.coffeeshop.security.NavigationPolicy;
 import com.coffeeshop.service.DashboardService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,8 +23,14 @@ public final class DashboardController {
     private static final DateTimeFormatter ACTIVITY_TIME = DateTimeFormatter.ofPattern("MMM d, HH:mm");
 
     private final DashboardService dashboardService;
+    private final AuthenticatedUser user;
+    private final NavigationPolicy navigationPolicy;
     private final Consumer<NavigationItem> navigationHandler;
+    private NavigationItem primaryAction = NavigationItem.POS;
+    private NavigationItem secondaryAction = NavigationItem.TABLES;
 
+    @FXML private Label dashboardHeadingLabel;
+    @FXML private Label dashboardSubheadingLabel;
     @FXML private Label todaySalesLabel;
     @FXML private Label todayOrdersLabel;
     @FXML private Label activeTablesLabel;
@@ -32,14 +40,32 @@ public final class DashboardController {
     @FXML private Button newOrderButton;
     @FXML private Button viewTablesButton;
 
-    public DashboardController(DashboardService dashboardService, Consumer<NavigationItem> navigationHandler) {
+    public DashboardController(DashboardService dashboardService, AuthenticatedUser user,
+                               Consumer<NavigationItem> navigationHandler) {
         this.dashboardService = Objects.requireNonNull(dashboardService);
+        this.user = Objects.requireNonNull(user);
+        this.navigationPolicy = new NavigationPolicy();
         this.navigationHandler = Objects.requireNonNull(navigationHandler);
     }
 
     @FXML private void initialize() {
-        newOrderButton.setOnAction(event -> navigationHandler.accept(NavigationItem.POS));
-        viewTablesButton.setOnAction(event -> navigationHandler.accept(NavigationItem.TABLES));
+        if (navigationPolicy.isCashierWorkspace(user)) {
+            dashboardHeadingLabel.setText("Ready for the next order");
+            dashboardSubheadingLabel.setText(
+                    "Start a sale or review today's orders, tables, and register activity.");
+            newOrderButton.setText("Start new sale");
+            viewTablesButton.setText("View cafe tables");
+        } else if (navigationPolicy.isManagerWorkspace(user)) {
+            dashboardHeadingLabel.setText("Manage today's operations");
+            dashboardSubheadingLabel.setText(
+                    "Review inventory, reports, and the operational areas that need attention.");
+            newOrderButton.setText("Review inventory");
+            viewTablesButton.setText("Open reports");
+            primaryAction = NavigationItem.INVENTORY;
+            secondaryAction = NavigationItem.REPORTS;
+        }
+        newOrderButton.setOnAction(event -> navigationHandler.accept(primaryAction));
+        viewTablesButton.setOnAction(event -> navigationHandler.accept(secondaryAction));
         refresh();
     }
 

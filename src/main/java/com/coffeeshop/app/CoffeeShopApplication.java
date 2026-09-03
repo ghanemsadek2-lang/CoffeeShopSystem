@@ -212,6 +212,10 @@ public final class CoffeeShopApplication extends Application {
     }
 
     private Parent loadModuleView(NavigationItem item) {
+        applicationContext.session().currentUser().ifPresentOrElse(
+                user -> new NavigationPolicy().requireAccess(user, item),
+                () -> { throw new SecurityException("An authenticated session is required."); }
+        );
         String fxml = item == NavigationItem.DASHBOARD ? "/fxml/dashboard-view.fxml"
                 : item == NavigationItem.POS ? "/fxml/pos-view.fxml"
                 : item == NavigationItem.ORDERS ? "/fxml/orders-view.fxml"
@@ -237,6 +241,7 @@ public final class CoffeeShopApplication extends Application {
             if (type == DashboardController.class) {
                 return new DashboardController(new DashboardService(
                         new JdbcDashboardRepository(applicationContext.dataSource())),
+                        applicationContext.session().currentUser().orElseThrow(),
                         destination -> mainShellController.navigateTo(destination));
             }
             if (type == ModulePlaceholderController.class) {
