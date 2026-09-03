@@ -36,20 +36,20 @@
 .brand-mark-text {
     -fx-text-fill: #fffaf3;
     -fx-font-size: 25px;
-    -fx-font-weight: 800;
+    -fx-font-weight: bold;
 }
 
 .brand-name {
     -fx-text-fill: #fffaf3;
     -fx-font-size: 16px;
-    -fx-font-weight: 800;
+    -fx-font-weight: bold;
 }
 
 .brand-product,
 .eyebrow {
     -fx-text-fill: #c8955c;
     -fx-font-size: 10px;
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
 }
 
 .coffee-art {
@@ -81,7 +81,7 @@
 .brand-headline {
     -fx-text-fill: #fffaf3;
     -fx-font-size: 30px;
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
 }
 
 .brand-tagline {
@@ -106,7 +106,7 @@
 .welcome-title {
     -fx-text-fill: #2e211a;
     -fx-font-size: 32px;
-    -fx-font-weight: 750;
+    -fx-font-weight: bold;
 }
 
 .welcome-copy {
@@ -117,7 +117,7 @@
 .field-label {
     -fx-text-fill: #3b2c23;
     -fx-font-size: 13px;
-    -fx-font-weight: 650;
+    -fx-font-weight: bold;
 }
 
 .login-field {
@@ -176,7 +176,7 @@
     -fx-background-radius: 10px;
     -fx-cursor: hand;
     -fx-font-size: 14px;
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
     -fx-padding: 13px 22px;
     -fx-text-fill: #fffdf9;
 }

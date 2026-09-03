@@ -19,7 +19,7 @@
 .placeholder-title {
     -fx-text-fill: #2f241c;
     -fx-font-size: 26px;
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
     -fx-text-alignment: center;
 }
 
@@ -32,11 +32,11 @@
 .modifier-group-title {
     -fx-text-fill: #3b2a20;
     -fx-font-size: 14px;
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
 }
 
 .modifier-total {
     -fx-text-fill: #5b3424;
     -fx-font-size: 16px;
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
 }
