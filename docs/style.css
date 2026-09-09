@@ -799,3 +799,60 @@ footer strong {
     text-transform: uppercase;
 }
 
+
+@media (max-width: 760px) {
+    .hero {
+        padding: 25px 5% 55px;
+    }
+
+    .hero-content {
+        margin-top: 0;
+    }
+
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        align-items: start;
+    }
+
+    .hero-stats > * {
+        min-width: 0;
+        text-align: center;
+    }
+
+    .hero-stats strong {
+        font-size: 0.95rem;
+    }
+
+    .hero-stats span {
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
+}
+
+@media (max-width: 760px) {
+    .hero {
+        padding-top: 5px;
+    }
+
+    .eyebrow {
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    .hero-stats {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 32px;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-stats div {
+        align-items: center;
+        text-align: center;
+    }
+}
